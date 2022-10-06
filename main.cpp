@@ -43,7 +43,7 @@ int main() {
 				cin >> classGrade6;
 				break;
 			}
-			loopCount++;
+			++loopCount;
 		}
 	}
 	else {
