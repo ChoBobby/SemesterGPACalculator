@@ -5,118 +5,82 @@ using namespace std;
 
 int main() {
 	int numClasses;
-	int loopCount;
-	float classGrade1{};
-	float classGrade2{};
-	float classGrade3{};
-	float classGrade4{};
-	float classGrade5{};
-	float classGrade6{};
-	float avgGrade{};
-	float gpa{};
+	int totCreds = 0;
+	float totGps = 0;
+	float gpa;
 
-	cout << "How many classes do you have?: " << endl;
+	cout << " ------------------------------------------------- " << endl;
+	cout << "|     Welcome to my Semester GPA Calculator!      |" << endl;
+	cout << "|  Updated to calculate credit hours now aswell!  |" << endl;
+	cout << " ------------------------------------------------- " << endl;
+
+	cout << endl << "Classes this Semester (Up to 6): ";
 	cin >> numClasses;
 
-	if (numClasses > 0 && numClasses <= 6) {
-		loopCount = 1;
-		while (loopCount <= numClasses) {
-			cout << "Enter Class " << loopCount << " Grade: " << endl;
+	if (numClasses <= 6 && numClasses > 0) {
+		int grade[7] = {};
+		int cred[7] = {};
+		float gp;
+		float gps[7] = {};
 
-			switch (loopCount) {
-			case 1:
-				cin >> classGrade1;
-				break;
-			case 2:
-				cin >> classGrade2;
-				break;
-			case 3:
-				cin >> classGrade3;
-				break;
-			case 4:
-				cin >> classGrade4;
-				break;
-			case 5:
-				cin >> classGrade5;
-				break;
-			case 6:
-				cin >> classGrade6;
-				break;
+		for (int i = 1; i <= numClasses; ++i) {
+			cout << endl << "Class " << i << " - " << endl;
+			cout << "Grade Percentage: ";
+			cin >> grade[i];
+			cout << "Credit Hours: ";
+			cin >> cred[i];
+			totCreds += cred[i];
+
+			if (grade[i] >= 93) {
+				gp = 4.0;
 			}
-			++loopCount;
+			else if (grade[i] >= 90) {
+				gp = 3.7;
+			}
+			else if (grade[i] >= 87) {
+				gp = 3.3;
+			}
+			else if (grade[i] >= 83) {
+				gp = 3.0;
+			}
+			else if (grade[i] >= 80) {
+				gp = 2.7;
+			}
+			else if (grade[i] >= 77) {
+				gp = 2.3;
+			}
+			else if (grade[i] >= 73) {
+				gp = 2.0;
+			}
+			else if (grade[i] >= 70) {
+				gp = 1.7;
+			}
+			else if (grade[i] >= 67) {
+				gp = 1.3;
+			}
+			else if (grade[i] >= 63) {
+				gp = 1.0;
+			}
+			else if (grade[i] >= 60) {
+				gp = 0.7;
+			}
+			else {
+				gp = 0.0;
+			}
+
+			gps[i] = gp * cred[i];
+			cout << "Grade Points: " << gps[i] << endl;
+
+			totGps += gps[i];
 		}
+
+		gpa = totGps / totCreds;
+		cout << endl << "--------------------------------------------------" << endl;
+		cout << endl << "SEMESTER GPA: " << fixed << setprecision(2) << gpa << endl;
+		cout << "TOTAL CREDIT HOURS: " << totCreds << endl;
 	}
 	else {
-		cout << endl << "Error: Only allowed between 1 - 6 classes." << endl;
+		cout << endl << "Error: Maximum of 1 - 6 classes allowed." << endl;
 	}
-
-	if (numClasses > 0 && numClasses <= 6) {
-		if (numClasses == 1) {
-			avgGrade = classGrade1;
-		}
-		else if (numClasses == 2) {
-			avgGrade = (classGrade1 + classGrade2) / numClasses;
-		}
-		else if (numClasses == 3) {
-			avgGrade = (classGrade1 + classGrade2 + classGrade3) / numClasses;
-		}
-		else if (numClasses == 4) {
-			avgGrade = (classGrade1 + classGrade2 + classGrade3 + classGrade4) / numClasses;
-		}
-		else if (numClasses == 5) {
-			avgGrade = (classGrade1 + classGrade2 + classGrade3 + classGrade4 + classGrade5) / numClasses;
-		}
-		else {
-			avgGrade = (classGrade1 + classGrade2 + classGrade3 + classGrade4 + classGrade5 + classGrade6) / numClasses;
-		}
-
-		if (avgGrade > 0 && avgGrade < 60) {
-			gpa = 0.0;
-		}
-		else if (avgGrade > 0 && avgGrade < 67) {
-			gpa = 1.0;
-		}
-		else if (avgGrade > 0 && avgGrade < 70) {
-			gpa = 1.3;
-		}
-		else if (avgGrade > 0 && avgGrade < 73) {
-			gpa = 1.7;
-		}
-		else if (avgGrade > 0 && avgGrade < 77) {
-			gpa = 2.0;
-		}
-		else if (avgGrade > 0 && avgGrade < 80) {
-			gpa = 2.3;
-		}
-		else if (avgGrade > 0 && avgGrade < 84) {
-			gpa = 2.7;
-		}
-		else if (avgGrade > 0 && avgGrade < 87) {
-			gpa = 3.0;
-		}
-		else if (avgGrade > 0 && avgGrade < 90) {
-			gpa = 3.3;
-		}
-		else if (avgGrade > 0 && avgGrade < 93) {
-			gpa = 3.7;
-		}
-		else if (avgGrade > 0 && avgGrade <= 100) {
-			gpa = 4.0;
-		}
-		else if (avgGrade > 0 && avgGrade > 100) {
-			gpa = 4.0;
-		}
-		else {
-			cout << endl << "Error: Grade Point Average below 0.0." << endl;
-		}
-
-		if (avgGrade >= 0 && gpa >= 0) {
-			cout << endl << "Average Grade: " << fixed << setprecision(2) << avgGrade << "%" << endl;
-			cout << "Semester GPA: " << gpa << endl;
-		}
-		else {
-		}
-	}
-
 	return 0;
 }
